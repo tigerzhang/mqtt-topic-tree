@@ -9,7 +9,7 @@
 namespace Yunba {
     TopicTreeNode::TopicTreeNode(TopicTreeNode* parent, std::string data) :
     _parent(parent)
-    , _data(data)
+    , _name(data)
     {
     }
 

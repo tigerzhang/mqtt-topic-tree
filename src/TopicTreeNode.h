@@ -12,7 +12,7 @@ namespace Yunba {
 //        using TopicTreeNodePtr = std::shared_ptr<TopicTreeNode<T>>;
 //        typedef std::shared_ptr<TopicTreeNode<T>> TopicTreeNodePtr;
     private:
-        std::string _data;
+        std::string _name;
         TopicTreeNode* _parent;
         std::map< std::string, std::shared_ptr<TopicTreeNode> > _children;
         std::set<uint64_t> _uids;
@@ -27,11 +27,11 @@ namespace Yunba {
         TopicTreeNode(TopicTreeNode* parent, std::string data);
         ~TopicTreeNode() {};
 
-        std::string getData() const {
-            return _data;
+        std::string getName() const {
+            return _name;
         };
         void setData(const std::string& data) {
-            _data = data;
+            _name = data;
         };
         std::shared_ptr<TopicTreeNode> addChild(const std::string& name, const std::string& data);
         void removeChild(const std::string &name);

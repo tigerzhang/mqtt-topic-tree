@@ -61,16 +61,16 @@ int main() {
     auto topic2 = appkey1->addChild("topic2", "");
 
     auto node = root.findNode("/appkey1");
-    std::cout << (node ? node->getData() : "NULL") << std::endl;
+    std::cout << (node ? node->getName() : "NULL") << std::endl;
 
     node = root.findNode("/appkey1/topic1");
-    std::cout << (node ? node->getData() : "NULL") << std::endl;
+    std::cout << (node ? node->getName() : "NULL") << std::endl;
 
     node = root.findNode("/appkey1/topic2");
-    std::cout << (node ? node->getData() : "NULL") << std::endl;
+    std::cout << (node ? node->getName() : "NULL") << std::endl;
 
     node = root.findNode("/appkey1/topic3");
-    std::cout << (node ? node->getData() : "NULL") << std::endl;
+    std::cout << (node ? node->getName() : "NULL") << std::endl;
 
     std::cout << "Create /appkey2/topic1" << std::endl;
     int count = 100;
@@ -97,7 +97,7 @@ int main() {
 
     sub(root, 2002, "/appkey2/topic1");
     node = root.findNode("/appkey2/topic1");
-    std::cout << (node ? node->getData() : "NULL") << std::endl;
+    std::cout << (node ? node->getName() : "NULL") << std::endl;
     print_node_uids(node);
 
     ///////// test case: sub with route
@@ -184,7 +184,7 @@ int main() {
 
 void print_node_uids(Yunba::TopicTreeNode *node) {
     if (node) {
-        std::cout << std::endl << "uids of node: " << node->getData() << std::endl;
+        std::cout << std::endl << "uids of node: " << node->getName() << std::endl;
         for (auto& uid: node->getUids()) {
             std::cout << ": " << uid << std::endl;
         }
@@ -193,11 +193,11 @@ void print_node_uids(Yunba::TopicTreeNode *node) {
 
 void print_uid_route(const Yunba::TopicTreeNode *node) {
     if (node) {
-        std::cout << std::endl << "uid -> hostname of: " << node->getData() << std::endl;
+        std::cout << std::endl << "uid -> hostname of: " << node->getName() << std::endl;
         for (auto& i: node->get_uids_and_route()) {
             std::cout << ": " << i.first << "->" << i.second << std::endl;
         }
-        std::cout << "hostname -> uid of: " << node->getData() << std::endl;
+        std::cout << "hostname -> uid of: " << node->getName() << std::endl;
         for (auto& i: node->get_route_index()) {
             std::cout << ": " << i.first << "->" << i.second << std::endl;
         }
