@@ -136,6 +136,13 @@ int main() {
     {
         assert(std::distance(iterpair.first, iterpair.second) == 1);
     }
+    // check uid subscribed topics
+    {
+        auto topics = node->get_uid_subcribed_topic().find(2003)->second;
+        assert(topics.size() == 1);
+        assert(*topics.begin() == node);
+    }
+
 
     //////// test case: sub one more uid
     sub(root, 2004, "hostname2", "/appkey3/topic2");
@@ -153,6 +160,36 @@ int main() {
     // only two entry
     {
         assert(std::distance(iterpair.first, iterpair.second) == 2);
+    }
+    // check uid subscribed topics
+    {
+        auto topics = node->get_uid_subcribed_topic().find(2004)->second;
+        assert(topics.size() == 1);
+        assert(*topics.begin() == node);
+    }
+
+    //////// test case: sub another topic
+    {
+        sub(root, 2004, "hostname2", "/appkey3/topic3");
+        auto node2 = make_sure_path(root, "/appkey3/topic3");
+        // check uid subscribed topics
+        auto topics = node->get_uid_subcribed_topic().find(2004)->second;
+        assert(topics.size() == 2);
+        auto it = topics.begin();
+        assert(*it++ == node);
+        assert(*it == node2);
+    }
+
+    /////// test case: sub the topic again
+    {
+        sub(root, 2004, "hostname2", "/appkey3/topic3");
+        auto node2 = make_sure_path(root, "/appkey3/topic3");
+        // check uid subscribed topics
+        auto topics = node->get_uid_subcribed_topic().find(2004)->second;
+        assert(topics.size() == 2);
+        auto it = topics.begin();
+        assert(*it++ == node);
+        assert(*it == node2);
     }
 
     print_uid_route(node);

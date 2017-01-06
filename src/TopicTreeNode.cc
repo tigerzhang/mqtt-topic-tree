@@ -7,6 +7,9 @@
 #include "TopicTreeNode.h"
 
 namespace Yunba {
+    std::map<uint64_t, std::set<TopicTreeNode*>> TopicTreeNode::_uid_subcribed_topic;
+    const std::string TopicTreeNode::OFFLINE = "N";
+
     TopicTreeNode::TopicTreeNode(TopicTreeNode* parent, std::string data) :
     _parent(parent)
     , _name(data)
@@ -74,5 +77,9 @@ namespace Yunba {
 
     const std::multimap<std::string, uint64_t> &TopicTreeNode::get_route_index() const {
         return _route_index;
+    }
+
+    const std::map<uint64_t, std::set<TopicTreeNode *>> &TopicTreeNode::get_uid_subcribed_topic() const {
+        return _uid_subcribed_topic;
     }
 }
